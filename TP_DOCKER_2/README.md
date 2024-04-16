@@ -73,4 +73,11 @@ docker network create tp_docker
 docker run --name tp_mysql -d --network=tp_docker -e MYSQL_ROOT_PASSWORD=root mysql
 docker run --name tp_phpmyadmin -d --network=tp_docker -e PMA_HOST=tp_mysql -p 8080:80 phpmyadmin/phpmyadmin
 ```
+- Accéder à phpMyAdmin en utilisant l'URL http://localhost:8080 et les identifiants que vous avez définis précédemment.
+
+![connexion](https://github.com/Devops-Dev-B-2024/Lucas-G/assets/94311330/fcc835dc-4ac0-4e8b-9f13-074c322237c1)
+
+- Créer une base de données puis faîtes la création d'une table en renseignant des champs
+
+![phpmyad](https://github.com/Devops-Dev-B-2024/Lucas-G/assets/94311330/f4df7dc5-47f9-404c-84da-4dac8fb2329d)
 
