@@ -81,3 +81,11 @@ docker run --name tp_phpmyadmin -d --network=tp_docker -e PMA_HOST=tp_mysql -p 8
 
 ![phpmyad](https://github.com/Devops-Dev-B-2024/Lucas-G/assets/94311330/f4df7dc5-47f9-404c-84da-4dac8fb2329d)
 
+# Utilisation de docker-compose.yml
+
+### a. Allez lire la documentation de docker-compose et essayer de décrire à quoi sert cette commande VS la commande docker run
+
+- La commande docker-compose permet de lancer plusieurs conteneurs simultanément, contrairement à docker run qui ne peut en exécuter qu'un à la fois. Docker Compose facilite également la gestion des volumes, du réseau et des services à travers un unique fichier de configuration.
+
+
+
