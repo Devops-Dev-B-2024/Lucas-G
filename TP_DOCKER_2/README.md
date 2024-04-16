@@ -40,3 +40,18 @@ docker rm TP2
 docker run --name TP2 -d -p 80:80 nginx
 docker cp ./html/index.html TP2:/usr/share/nginx/html/index.html
 ```
+## Builder une image 
+
+### a. A l'aide d'un Dockerfile, créer une image qui permet d'executer un serveur web (apache, nginx...)
+
+- Création du Dockerfile 
+![dockerfile](https://github.com/Devops-Dev-B-2024/Lucas-G/assets/94311330/dd5ea61d-02b0-4b2d-bf90-455d45418277)
+
+- - Création de l'image 
+![dockerbuild](https://github.com/Devops-Dev-B-2024/Lucas-G/assets/94311330/da83f919-9c30-47ec-a99c-d7c7f4f40871)
+
+
+
+
+
+
