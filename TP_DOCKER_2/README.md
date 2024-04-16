@@ -95,3 +95,7 @@ docker-compose up
 ```
 docker-compose down
 ```
+
+### c. Ecrivez un fichier docker-compose.yml pour servir votre base de données (mysql, mariadb, etc.) ET phpmyadmin
+
+![compose](https://github.com/Devops-Dev-B-2024/Lucas-G/assets/94311330/98e0ea0f-2dfc-4555-9ef3-a155840878da)
