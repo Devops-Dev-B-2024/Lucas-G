@@ -58,6 +58,12 @@ docker run --name tp2 -p 80:80 tp2
 - Chaque lancement de l'image nécessite de spécifier tous ses paramètres à nouveau.
 - L'utilisation d'un Dockerfile simplifie le lancement de l'image, car la plupart des paramètres et commandes sont préconfigurés; il suffit de lancer l'image et de définir les ports.
 
+# Utiliser une base de donnée dans un container Docker
 
+### a. Récuperer les images mysql (ou mariadb) et phpmyadmin depuis le Docker Hub
 
+```
+docker pull mysql
+docker pull phpmyadmin
+```
 
