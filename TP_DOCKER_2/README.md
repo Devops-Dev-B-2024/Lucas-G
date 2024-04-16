@@ -66,4 +66,11 @@ docker run --name tp2 -p 80:80 tp2
 docker pull mysql
 docker pull phpmyadmin
 ```
+### b. Executer 2 containers à partir des images. Lancer phpmyadmin (conteneurisé et publié sur un port) et ajoutez une table via l'interface
+
+```
+docker network create tp_docker
+docker run --name tp_mysql -d --network=tp_docker -e MYSQL_ROOT_PASSWORD=root mysql
+docker run --name tp_phpmyadmin -d --network=tp_docker -e PMA_HOST=tp_mysql -p 8080:80 phpmyadmin/phpmyadmin
+```
 
