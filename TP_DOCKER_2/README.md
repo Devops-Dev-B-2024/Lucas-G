@@ -40,7 +40,7 @@ docker rm TP2
 docker run --name TP2 -d -p 80:80 nginx
 docker cp ./html/index.html TP2:/usr/share/nginx/html/index.html
 ```
-## Builder une image 
+# Builder une image 
 
 ### a. A l'aide d'un Dockerfile, créer une image qui permet d'executer un serveur web (apache, nginx...)
 
@@ -53,9 +53,11 @@ docker cp ./html/index.html TP2:/usr/share/nginx/html/index.html
 docker run --name tp2 -p 80:80 tp2
 ```
 
+### c. Quelles différences observez-vous entre les questions 3 et 4, trouvez les avantages & inconvénients de chaque procédure (mount volume VS copy)
 
+- Chaque lancement de l'image nécessite de spécifier tous ses paramètres à nouveau.
+- L'utilisation d'un Dockerfile simplifie le lancement de l'image, car la plupart des paramètres et commandes sont préconfigurés; il suffit de lancer l'image et de définir les ports.
 
--
 
 
 
