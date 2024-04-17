@@ -1,0 +1,887 @@
+openapi: 3.0.3
+info:
+  title: CineCritique
+  description: API for movie recommendations
+  contact:
+    email: lucas.guerra@ynov.com
+  version: 1.0.0
+servers:
+  - url: "{protocol}://{server}"
+    variables:
+      protocol:
+        enum:
+          - http
+          - https
+        default: http
+      server:
+        default: localhost:3000
+tags:
+  - name: users
+    description: Everything about Users
+  - name: movies
+    description: Everything about Movies
+  - name: genres
+    description: Everything about Genres
+  - name: ratings
+    description: Everything about Ratings
+  - name: reviews
+    description: Everything about Reviews
+paths:
+  /users:
+    get:
+      tags:
+        - users
+      summary: Get all users
+      operationId: getAllUsers
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of all users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsersList'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      tags:
+        - users
+      summary: Add a new user
+      operationId: addUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreation'
+      responses:
+        '201':
+          $ref: '#/components/responses/ResourceCreated'
+        '400':
+          $ref: '#/components/responses/InvalidBody'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /users/{id}:
+    get:
+      tags:
+        - users
+      summary: Get a user by their ID
+      operationId: getUserById
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/idInPath'
+      responses:
+        '200':
+          description: User data retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      tags:
+        - users
+      summary: Update a user
+      operationId: updateUser
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/idInPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreation'
+      responses:
+        '200':
+          description: User updated successfully
+        '400':
+          $ref: '#/components/responses/InvalidBody'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      tags:
+        - users
+      summary: Delete a user
+      operationId: deleteUser
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/idInPath'
+      responses:
+        '200':
+          description: User deleted successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /genres:
+    get:
+      tags:
+        - genres
+      summary: Get all genres
+      operationId: getAllGenres
+      security:
+        - bearerAuth: []      
+      responses:
+        '200':
+          description: List of all genres
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenresList'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      tags:
+        - genres
+      summary: Add a new genre
+      operationId: addGenre
+      security:
+        - bearerAuth: []      
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenreCreation'
+      responses:
+        '201':
+          $ref: '#/components/responses/ResourceCreated'
+        '400':
+          $ref: '#/components/responses/InvalidBody'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /genres/{id}:
+    get:
+      tags:
+        - genres
+      summary: Get a specific genre by its ID
+      operationId: getGenreById
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/idInPath'
+      responses:
+        '200':
+          description: Genre data retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Genre'
+        '404':
+          $ref: '#/components/responses/NotFound'  
+    put:
+      tags:
+        - genres
+      summary: Update a specific genre
+      operationId: updateGenre
+      security:
+        - bearerAuth: []      
+      parameters:
+        - $ref: '#/components/parameters/idInPath'
+      responses:
+        '200':
+          description: Genre updated successfully
+        '400':
+          $ref: '#/components/responses/InvalidBody'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      tags:
+        - genres
+      summary: Delete a specific genre
+      operationId: deleteGenre
+      security:
+        - bearerAuth: []      
+      parameters:
+        - $ref: '#/components/parameters/idInPath'
+      responses:
+        '204':
+          description: Genre deleted successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+
+  /movies:
+    get:
+      tags:
+        - movies
+      summary: Get all movies
+      operationId: getAllMovies
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of all movies
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoviesList'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      tags:
+        - movies
+      summary: Add a new movie
+      operationId: addMovie
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MovieCreation'
+      responses:
+        '201':
+          $ref: '#/components/responses/ResourceCreated'
+        '400':
+          $ref: '#/components/responses/InvalidBody'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /movies/{id}:
+    get:
+      tags:
+        - movies
+      summary: Get a movie by its ID
+      operationId: getMovieById
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/idInPath'
+      responses:
+        '200':
+          description: Movie data retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Movie'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      tags:
+        - movies
+      summary: Update a movie
+      operationId: updateMovie
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/idInPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MovieCreation'
+      responses:
+        '200':
+          description: Movie updated successfully
+        '400':
+          $ref: '#/components/responses/InvalidBody'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      tags:
+        - movies
+      summary: Delete a specific movie
+      operationId: deleteMovie
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/idInPath'
+      responses:
+        '204':
+          description: Movie deleted successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+          
+
+  /reviews:
+    get:
+      tags:
+        - reviews
+      summary: Get all reviews
+      operationId: getAllReviews
+      security:
+        - bearerAuth: []      
+      responses:
+        '200':
+          description: List of all reviews
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewsList'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      tags:
+        - reviews
+      summary: Add a new review
+      operationId: addReview
+      security:
+        - bearerAuth: []      
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewCreation'
+      responses:
+        '201':
+          $ref: '#/components/responses/ResourceCreated'
+        '400':
+          $ref: '#/components/responses/InvalidBody'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /reviews/{id}:
+    get:
+      tags:
+        - reviews
+      summary: Get a specific review by its ID
+      operationId: getReviewById
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/idInPath'
+      responses:
+        '200':
+          description: Review data retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+        '404':
+          $ref: '#/components/responses/NotFound'  
+    put:
+      tags:
+        - reviews
+      summary: Update a specific review
+      operationId: updateReview
+      security:
+        - bearerAuth: []      
+      parameters:
+        - $ref: '#/components/parameters/idInPath'
+      responses:
+        '200':
+          description: Review updated successfully
+        '400':
+          $ref: '#/components/responses/InvalidBody'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      tags:
+        - reviews
+      summary: Delete a specific review
+      operationId: deleteReview
+      security:
+        - bearerAuth: []      
+      parameters:
+        - $ref: '#/components/parameters/idInPath'
+      responses:
+        '204':
+          description: Review deleted successfully
+        '404':
+          $ref: '#/components/responses/NotFound'          
+
+  /ratings:
+    get:
+      tags:
+        - ratings
+      summary: Get all ratings
+      operationId: getAllRatings
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of all ratings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RatingsList'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      tags:
+        - ratings
+      summary: Add a new rating
+      operationId: addRating
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RatingCreation'
+      responses:
+        '201':
+          $ref: '#/components/responses/ResourceCreated'
+        '400':
+          $ref: '#/components/responses/InvalidBody'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /ratings/{id}:
+    get:
+      tags:
+        - ratings
+      summary: Get a specific rating by its ID
+      operationId: getRatingById
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/idInPath'
+      responses:
+        '200':
+          description: Rating data retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rating'
+        '404':
+          $ref: '#/components/responses/NotFound'  
+    put:
+      tags:
+        - ratings
+      summary: Update a specific rating
+      operationId: updateRating
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/idInPath'
+      responses:
+        '200':
+          description: Rating updated successfully
+        '400':
+          $ref: '#/components/responses/InvalidBody'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      tags:
+        - ratings
+      summary: Delete a specific rating
+      operationId: deleteRating
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/idInPath'
+      responses:
+        '204':
+          description: Rating deleted successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /axios/movies:
+    post:
+      tags:
+        - movies
+      summary: Fetch and store movie data from an external API
+      operationId: processMovies
+      security:
+        - bearerAuth: []      
+      responses:
+        '200':
+          description: Movies processed and stored successfully
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /users/{userId}/ratings:
+    get:
+      tags:
+        - ratings
+      summary: Get ratings by a specific user
+      operationId: getRatingsByUser
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Ratings of the specified user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RatingsList'
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFound'
+
+  /users/{userId}/reviews:
+    get:
+      tags:
+        - reviews
+      summary: Get reviews by a specific user
+      operationId: getReviewsByUser
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Reviews of the specified user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewsList'
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFound'
+
+  /movies/{movie_id}/ratings:
+    get:
+      tags:
+        - ratings
+      summary: Get ratings for a specific movie
+      operationId: getRatingsByMovie
+      parameters:
+        - in: path
+          name: movie_id
+          required: true
+          schema:
+            type: integer
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Ratings for the specified movie
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RatingsList'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /movies/{movie_id}/reviews:
+    get:
+      tags:
+        - reviews
+      summary: Get reviews for a specific movie
+      operationId: getReviewsByMovie
+      parameters:
+        - in: path
+          name: movie_id
+          required: true
+          schema:
+            type: integer
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Reviews for the specified movie
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewsList'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /genres/{genre_id}/movies:
+    get:
+      tags:
+        - movies
+      summary: Get movies by a specific genre
+      operationId: getMoviesByGenre
+      parameters:
+        - in: path
+          name: genre_id
+          required: true
+          schema:
+            type: integer
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Movies associated with the specified genre
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MoviesList'
+        '404':
+          description: Genre not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFound'      
+
+
+  /auth/login:
+    post:
+      tags:
+        - auth
+      summary: Authenticate a user
+      operationId: loginUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: "user@example.com"
+                password:
+                  type: string
+                  format: password
+                  example: "password123"
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        username:
+          type: string
+          example: "Lucas314"
+        email:
+          type: string
+          example: "lucas.guerra@ynov.com"
+        isAdmin:
+          type: boolean
+          example: false
+    UserCreation:
+      type: object
+      properties:
+        username:
+          type: string
+          example: "Lucas314"
+        email:
+          type: string
+          example: "lucas.guerra@ynov.com"   
+        password:
+          type: string
+          format: password
+          example: "password123"
+    UsersList:
+      type: array
+      items:
+        $ref: '#/components/schemas/User'
+
+    Genre:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Comedy"
+    GenreCreation:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Comedy"          
+    GenresList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Genre'
+
+    Movie:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: "Inception"
+        genre_id:
+          type: integer
+          example: 2
+    MovieCreation:
+      type: object
+      properties:
+        title:
+          type: string
+          example: "Inception"
+        genre_id:
+          type: integer
+          example: 2          
+    MoviesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Movie'        
+
+    Review:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        author:
+          type: string
+          maxLength: 100
+          example: "LUCASG31"
+        content:
+          type: string
+          example: "Great movie!"
+        user_id:
+          type: integer
+          example: 2
+        movie_id:
+          type: integer
+          example: 3
+    ReviewCreation:
+      type: object
+      properties:
+        content:
+          type: string
+          example: "Great movie!"
+        movie_id:
+          type: integer
+          example: 3          
+    ReviewsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Review'
+
+
+    Rating:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        rating:
+          type: number
+          format: float
+          example: 4.5
+        user_id:
+          type: integer
+          example: 2
+        movie_id:
+          type: integer
+          example: 3
+    RatingCreation:
+      type: object
+      properties:
+        rating:
+          type: number
+          format: float
+          example: 4.5
+        movie_id:
+          type: integer
+          example: 3          
+    RatingsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Rating'
+
+
+  responses:
+    ResourceCreated:
+      description: "Resource created successfully."
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: true
+              id:
+                type: integer
+                example: 1
+    InvalidBody:
+      description: "Invalid request body."
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              message:
+                type: string
+                example: "Invalid request body."
+    InternalServerError:
+      description: "Internal server error."
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              message:
+                type: string
+                example: "Internal server error."
+    NotFound:
+      description: "Resource not found."
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              message:
+                type: string
+                example: "Resource not found."
+    Unauthorized:
+          description: "Access token is missing or invalid"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Unauthorized access"                
+
+  parameters:
+    idInPath:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+
