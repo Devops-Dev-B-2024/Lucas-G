@@ -1,0 +1,23 @@
+services:
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    networks:
+      - tp_docker
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: db
+    ports:
+      - "8080:80"
+    networks:
+      - tp_docker
+
+networks:
+    tp_docker:
+      driver: bridge
+
