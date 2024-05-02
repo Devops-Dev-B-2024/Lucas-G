@@ -69,4 +69,4 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: yourusername/cinecritique:latest
+        tags: dayql/cinecritique:latest
