@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt')
+const bcryptjs = require('bcryptjs')
 const { authorizeUserOwnProfile } = require('../jsonwebtoken/check')
 const DB = require('../db.config')
 const User = DB.User
