@@ -4,9 +4,11 @@ on:
   workflow_dispatch:
   push:
     branches:
+      - main 
       - TP3_DOCKER
   pull_request:
     branches:
+      - main
       - TP3_DOCKER
 
 jobs:
