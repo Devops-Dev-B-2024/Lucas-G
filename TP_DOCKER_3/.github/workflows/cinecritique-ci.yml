@@ -1,6 +1,7 @@
 name: CineCritique CI Pipeline
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - TP3_DOCKER
