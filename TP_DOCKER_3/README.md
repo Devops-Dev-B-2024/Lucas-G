@@ -1,7 +1,7 @@
 # Récupérer le code source de votre API lors du module API
 
 
-2. **Créer un Dockerfile qui permet de lancer une application NodeJS (v18-alpine ou v20)**
+2. ## Créer un Dockerfile qui permet de lancer une application NodeJS (v18-alpine ou v20)
 
     ![dockerfile](https://github.com/Dayql/FormulaireAPI/assets/94311330/2994d5f6-9d61-4656-9774-d5994731db0c)
 
@@ -9,11 +9,11 @@
 
    ![Construction de l'image](https://github.com/Dayql/FormulaireAPI/assets/94311330/50055d0f-6bca-4e66-a09f-e1641983f6c6)
 
-3. **Utiliser Docker pour lancer une image de base de données (MySQL ou MaraDB)**
+3. ## Utiliser Docker pour lancer une image de base de données (MySQL ou MaraDB)
 
    ![Démarrage MySQL](https://github.com/Dayql/FormulaireAPI/assets/94311330/772e525a-6e94-4765-83ab-4d4c388aac28)
 
-4. **Adapter vos fichiers de connexion à la base de données pour utiliser une base mysql plutôt que sqlite3 (si vous aviez utilisé sqlite) Rebuildez votre image docker et relancez un container, vérifiez que vous arrivez à utiliser l'app**
+4. ## Adapter vos fichiers de connexion à la base de données pour utiliser une base mysql plutôt que sqlite3 (si vous aviez utilisé sqlite) Rebuildez votre image docker et relancez un container, vérifiez que vous arrivez à utiliser l'app
 
 -  **Création du réseau Docker**
 
@@ -33,7 +33,7 @@
 
    ![Vérification 2](https://github.com/Dayql/FormulaireAPI/assets/94311330/c876513b-1950-417c-85c2-75b02ca616c8)
 
-5. **Créer un docker-compose.yml pour avoir 2 services (node et db) node doit se baser sur le build (votre Dockerfile) db doit se baser sur une image mariadb ou mysql**
+5. ## Créer un docker-compose.yml pour avoir 2 services (node et db) node doit se baser sur le build (votre Dockerfile) db doit se baser sur une image mariadb ou mysql
 
    ![Docker Compose](https://github.com/Dayql/FormulaireAPI/assets/94311330/c2b4763f-0493-426b-baae-5b0e6abd3057)
 
