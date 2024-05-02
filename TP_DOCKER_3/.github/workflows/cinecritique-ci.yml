@@ -3,10 +3,10 @@ name: CineCritique CI Pipeline
 on:
   push:
     branches:
-      - main
+      - TP3_DOCKER
   pull_request:
     branches:
-      - main
+      - TP3_DOCKER
 
 jobs:
   build-and-test:
