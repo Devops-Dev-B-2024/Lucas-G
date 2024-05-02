@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express')
 const cors = require("cors")
 const bodyParser = require('body-parser');
@@ -5,6 +6,8 @@ let DB = require('./db.config')
 const OpenApiValidator = require('express-openapi-validator')
 const swaggerUi = require('swagger-ui-express')
 const YAML = require('yamljs')
+
+
 
 const swaggerDocument = YAML.load('./open-api.yml')
 
