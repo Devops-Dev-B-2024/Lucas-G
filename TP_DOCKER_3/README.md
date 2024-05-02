@@ -43,7 +43,7 @@
 
 - **Que se passe-t-il si un de mes ports publiés est déjà utilisé ?**
 
-  Si un port est déjà utilisé sur la machine, Docker ne peut pas attribuer ce même port au conteneur, ce qui provoque une erreur indiquant que le port est déjà en usage.
+  Si un port est déjà utilisé sur la machine, Docker ne peut pas attribuer ce même port au conteneur, ce qui provoque une erreur indiquant que le port est déjà en usage
 
 - **Quelle option de la commande npm install permet de n'installer que les dépendances de production ?**
 
