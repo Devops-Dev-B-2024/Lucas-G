@@ -23,6 +23,9 @@ jobs:
       with:
         node-version: '20'
 
+    - name: List directory structure
+      run: ls -R        
+
     - name: Change to app directory
       run: cd TP_DOCKER_3/CineCritique        
 
