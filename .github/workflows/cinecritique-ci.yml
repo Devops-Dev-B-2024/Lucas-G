@@ -34,7 +34,7 @@ jobs:
       working-directory: TP_DOCKER_3/CineCritique      
       
     - name: Run tests
-      run: npx test
+      run: npm run test
       working-directory: TP_DOCKER_3/CineCritique
       
     - name: Run ESLint
