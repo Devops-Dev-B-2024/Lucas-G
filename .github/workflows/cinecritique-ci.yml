@@ -33,9 +33,11 @@ jobs:
       run: npm install
       working-directory: TP_DOCKER_3/CineCritique      
       
+    - name: Give permissions to Jest
+      run: chmod +x node_modules/.bin/jest
+
     - name: Run tests
-      run: npm run test
-      working-directory: TP_DOCKER_3/CineCritique
+      run: npm test
       
     - name: Run ESLint
       run: npx eslint .
