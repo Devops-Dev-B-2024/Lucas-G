@@ -34,7 +34,7 @@ jobs:
       working-directory: TP_DOCKER_3/CineCritique      
       
     - name: Run tests
-      run: npm test
+      run: ./node_modules/.bin/jest
       working-directory: TP_DOCKER_3/CineCritique            
       
     - name: Run ESLint
